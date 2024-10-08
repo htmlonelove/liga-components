@@ -1,0 +1,25 @@
+---
+import TabControl, {
+  type Props as TabControlProps
+} from '../TabControl/TabControl.astro'
+
+export interface Props {
+  list: TabControlProps<'a' | 'button' | 'span'>[]
+  isTabs?: boolean
+  className?: string
+}
+
+const { list, className, isTabs, ...props } = Astro.props
+---
+
+<div class:list={['tabs-controls', className]} {...props}>
+  <ul class="tabs-controls__list" data-tabs={isTabs && 'controls'}>
+    {
+      list.map((control) => (
+        <li class="tabs-controls__item">
+          <TabControl {...control} data-tabs={isTabs && 'control'} />
+        </li>
+      ))
+    }
+  </ul>
+</div>

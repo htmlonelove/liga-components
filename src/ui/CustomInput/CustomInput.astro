@@ -1,0 +1,29 @@
+---
+import type { HTMLTag, Polymorphic } from 'astro/types'
+
+export type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
+  inputLabel?: string
+  className?: string[]
+  textContent?: string
+  attrs?: {}
+}
+
+const {
+  as: Tag = 'input',
+  inputLabel = null,
+  className,
+  textContent,
+  attrs,
+  ...props
+} = Astro.props
+const baseClass = Tag === 'input' ? 'custom-input' : 'custom-textarea'
+---
+
+<div class:list={[baseClass, className]} {...attrs}>
+  <label>
+    {inputLabel && <span class={`${baseClass}__label`} set:html={inputLabel} />}
+    {Tag === 'input' && <Tag {...props} />}
+    {Tag === 'textarea' && <Tag {...props}>{textContent && textContent}</Tag>}
+  </label>
+  <slot />
+</div>

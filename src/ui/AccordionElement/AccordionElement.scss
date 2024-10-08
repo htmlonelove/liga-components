@@ -1,0 +1,86 @@
+.accordion-element {
+  position: relative;
+  background-color: transparent;
+  border: 1px solid var(--color-black);
+  padding: 19px 23px;
+  border-radius: 12px;
+
+  &.is-active {
+    > .accordion-element__btn .accordion-element__arrow {
+      transform: rotate(-179.99deg);
+    }
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background-color: var(--color-lavender);
+    color: var(--color-black);
+
+    user-select: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    //используйте, если нужно растянуть область клика на весь элемент
+    // &::before {
+    //   position: absolute;
+    //   inset: 0;
+    //   content: "";
+    // }
+  }
+
+  &__btn-text {
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 500;
+    text-align: left;
+  }
+
+  &__arrow {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    transform: translateZ(0) rotate(0deg);
+    transition: transform $transition;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__content {
+    max-height: 0;
+    transition: max-height $transition;
+    overflow: hidden;
+    padding-right: 48px;
+
+    @include vp-767 {
+      padding-right: 0;
+    }
+  }
+
+  &__content-inner {
+    padding-top: 16px;
+  }
+
+  &__text {
+    margin: 0;
+
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 400;
+    color: var(--color-black);
+
+    &:not(:last-of-type) {
+      margin-bottom: 16px;
+    }
+  }
+}

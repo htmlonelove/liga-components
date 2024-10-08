@@ -1,0 +1,36 @@
+---
+import { Icon } from 'astro-icon/components'
+
+export interface Props {
+  title: string
+  text?: string
+  isActive?: boolean
+  className?: string
+  mods?: string[]
+}
+
+const { title, text, isActive, mods, className } = Astro.props
+---
+
+<div
+  class:list={[
+    'accordion-element',
+    isActive && 'is-active',
+    mods?.map((mod) => `accordion-element--${mod}`),
+    className && className
+  ]}
+  data-accordion="element"
+>
+  <button class="accordion-element__btn" data-accordion="button">
+    <span class="accordion-element__btn-text" set:html={title} />
+    <span class="accordion-element__arrow">
+      <Icon name={'arrow-down'} />
+    </span>
+  </button>
+  <div class="accordion-element__content" data-accordion="content">
+    <div class="accordion-element__content-inner">
+      {text && <p class="accordion-element__text" set:html={text} />}
+      <slot />
+    </div>
+  </div>
+</div>

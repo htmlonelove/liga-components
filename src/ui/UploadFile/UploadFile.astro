@@ -1,0 +1,45 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import type { FileType } from './UploadFile.d'
+
+export interface Props extends HTMLAttributes<'input'> {
+  mods?: string[]
+  uploadType: FileType
+  btnText: string
+  validateOnInput?: boolean
+  validate?: 'file'
+  maxSize?: number
+  emptyMessage?: string
+}
+
+const { mods, btnText, uploadType, maxSize = null, ...props } = Astro.props
+---
+
+<upload-file
+  class:list={[
+    'upload-file',
+    mods?.map((mod) => `upload-file--${mod}`),
+    `upload-file--${uploadType}`
+  ]}
+  data-upload={uploadType}
+  data-max-size={maxSize}
+>
+  {
+    ['img-drop', 'file-drop', 'file-drop-preview'].includes(uploadType) && (
+      <div class="upload-file__drop-zone" data-drop-zone>
+        <span class="upload-file__drop-zone-text">
+          Перетащите файлы в эту область
+        </span>
+      </div>
+    )
+  }
+  <label>
+    <input type="file" {...props} />
+    <span class="upload-file__btn" set:html={btnText} />
+  </label>
+</upload-file>
+
+<script>
+  import UploadFile from './UploadFile'
+  customElements.define('upload-file', UploadFile)
+</script>

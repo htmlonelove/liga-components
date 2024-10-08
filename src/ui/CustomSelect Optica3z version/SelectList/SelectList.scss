@@ -1,0 +1,188 @@
+.select-list {
+  $root: &;
+  display: flex;
+  flex-direction: column;
+  gap: size(12);
+  width: 100%;
+  max-height: size(400);
+  margin: 0;
+  padding: size(16);
+  overflow-y: auto;
+
+  list-style: none;
+
+  background-color: var(--color-white);
+  border-radius: size(6);
+  box-shadow: 0 size(2) size(10) 0 var(--color-dim-gray-20);
+
+  transform: translateY(100%);
+  visibility: hidden;
+  opacity: 0;
+
+  transition: visibility $transition, opacity $transition;
+
+  &__item {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: size(8);
+    width: fit-content;
+
+    outline: none;
+    cursor: pointer;
+    user-select: none;
+
+    font-size: size(12);
+    line-height: 1.33;
+    color: var(--color-comet);
+    font-weight: 500;
+
+    transition: color $transition;
+    -webkit-tap-highlight-color: transparent;
+
+    &[aria-selected="true"] {
+      color: var(--color-black);
+
+      #{$root}__checkbox-icon {
+        background-color: var(--color-wild-watermelon);
+        border-color: var(--color-wild-watermelon);
+
+        svg {
+          opacity: 1;
+        }
+      }
+
+      @include hover-focus {
+        #{$root}__checkbox-icon {
+          border-color: var(--color-wild-watermelon);
+        }
+      }
+    }
+
+    @include hover {
+      color: var(--color-black);
+
+      #{$root}__checkbox-icon {
+        border-color: var(--color-heather);
+      }
+    }
+
+    @include focus {
+      #{$root}__checkbox-icon {
+        border-color: var(--color-grey-suit);
+      }
+    }
+
+    @include vp-767 {
+      gap: size(12);
+
+      font-size: size(14);
+      line-height: 1.29;
+    }
+  }
+
+  &__checkbox-icon {
+    position: relative;
+    flex-shrink: 0;
+
+    width: size(16);
+    height: size(16);
+    overflow: hidden;
+
+    color: var(--color-white);
+    background-color: var(--color-white);
+    border: size(1) solid var(--color-quartz);
+    border-radius: size(4);
+    transition: border-color $transition, background-color $transition;
+
+    @include vp-767 {
+      width: size(20);
+      height: size(20);
+    }
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+
+      width: size(13);
+      height: size(13);
+
+      background-image: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_6130_65512)"><path d="M5.08398 9.69478L8.63954 13.2504L15.7507 6.13916" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></g><defs><clipPath id="clip0_6130_65512"><rect width="20" height="20" fill="white"/></clipPath></defs></svg>');
+      background-size: contain;
+      background-repeat: no-repeat;
+      transition: opacity $transition;
+      content: "";
+
+      @include vp-767 {
+        width: size(16);
+        height: size(16);
+      }
+    }
+  }
+
+  &--filter {
+    visibility: visible;
+    opacity: 1;
+    max-height: none;
+    transform: none;
+    border-radius: 0;
+    padding: size(20) 0 0;
+    box-shadow: none;
+    background-color: transparent;
+    overflow: hidden;
+
+    @include vp-767 {
+      padding: 0 size(24) size(24);
+      overflow: auto;
+      gap: size(16);
+    }
+
+    #{$root}__checkbox-icon {
+      width: size(20);
+      height: size(20);
+
+      &::before {
+        width: size(16);
+        height: size(16);
+      }
+    }
+
+    #{$root}__item {
+      gap: size(12);
+
+      font-size: size(14);
+      line-height: 1.29;
+      font-weight: 500;
+    }
+  }
+
+  &--columns {
+    display: block;
+    column-gap: size(20);
+    columns: calc(50% - size(10)) 2;
+    margin-bottom: size(-12);
+
+    #{$root}__item {
+      break-inside: avoid;
+      padding-bottom: size(12);
+    }
+  }
+
+  &--slide-mobile {
+    @include vp-767 {
+      visibility: visible;
+      opacity: 1;
+      max-height: none;
+      transform: none;
+      border-radius: 0;
+      box-shadow: none;
+      background-color: transparent;
+      padding: 0 size(24) size(24);
+      overflow: auto;
+      gap: size(16);
+    }
+  }
+}

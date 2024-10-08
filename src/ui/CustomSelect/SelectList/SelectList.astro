@@ -1,0 +1,37 @@
+---
+export interface OptionsItem {
+  isActive?: boolean
+  text: string
+  value: string
+}
+
+interface Props {
+  optionsList: OptionsItem[]
+  className?: string
+}
+
+const { optionsList, className, ...props } = Astro.props
+---
+
+<ul
+  class:list={['select-list', 'custom-scrollbar', className]}
+  role="listbox"
+  {...props}
+>
+  {
+    optionsList.map((item) => {
+      const ariaSelected = item.isActive ? 'true' : 'false'
+      return (
+        <li
+          class="select-list__item"
+          tabindex="0"
+          data-select-value={item.value}
+          aria-selected={ariaSelected}
+          role="option"
+        >
+          <Fragment set:html={item.text} />
+        </li>
+      )
+    })
+  }
+</ul>

@@ -1,0 +1,44 @@
+---
+import { Icon } from 'astro-icon/components'
+import type { HTMLAttributes } from 'astro/types'
+
+export type Props = HTMLAttributes<'input'> & {
+  inputLabel?: string
+  mods?: string[]
+  className?: string[]
+  activeText?: string
+  attrs?: {}
+}
+
+const {
+  inputLabel = null,
+  mods,
+  className,
+  activeText = false,
+  ...props
+} = Astro.props
+---
+
+<div
+  class:list={[
+    'custom-toggle',
+    mods?.map((mod: string) => `custom-toggle--${mod}`),
+    className,
+    props.disabled && 'custom-toggle--disabled'
+  ]}
+  data-active-text={activeText}
+>
+  <label>
+    <input {...props} />
+    {
+      props.type === 'checkbox' ? (
+        <span class="custom-toggle__icon">
+          <Icon name="icon-tick" />
+        </span>
+      ) : (
+        <span class="custom-toggle__icon" />
+      )
+    }
+    {inputLabel && <span class="custom-toggle__label" set:html={inputLabel} />}
+  </label>
+</div>

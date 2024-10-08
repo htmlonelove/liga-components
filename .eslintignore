@@ -1,0 +1,5 @@
+dist/
+src/icons
+src/images
+util/
+env.d.ts

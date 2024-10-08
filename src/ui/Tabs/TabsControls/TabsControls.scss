@@ -1,0 +1,51 @@
+.tabs-controls {
+  position: relative;
+
+  @include vp-767 {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  &__list {
+    position: relative;
+    display: flex;
+    gap: 24px;
+    min-width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    overflow-y: visible;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    @include vp-767 {
+      overflow: auto;
+      scroll-snap-type: x mandatory;
+      width: auto;
+
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      gap: 16px;
+      // scroll-padding-left: 16px;
+      // padding-left: 16px;
+    }
+  }
+
+  &__item {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+
+    &:last-child {
+      @include vp-767 {
+        // padding-right: 16px;
+      }
+    }
+  }
+}
