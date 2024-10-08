@@ -1,0 +1,118 @@
+---
+import { Icon } from 'astro-icon/components'
+import SelectList, { type OptionsItem } from './SelectList/SelectList.astro'
+
+export interface Props {
+  selectLabel?: string
+  selectError?: string
+  selectPlaceholder?: string
+  selectName?: string
+  selectId?: string
+  buttonAriaLabel?: string
+  disabled?: boolean
+  optionsList: OptionsItem[]
+  className?: string[]
+  required?: boolean
+  openup?: boolean
+  mods?: string[]
+  selectType?: 'single' | 'multiple' | 'filter'
+  slideMobile?: boolean
+  columns?: boolean
+  validate?: boolean
+  baseMessage?: string
+  extraMessage?: string
+  successMessage?: string
+}
+
+const {
+  selectLabel,
+  selectError,
+  selectPlaceholder,
+  selectName,
+  selectId,
+  buttonAriaLabel,
+  disabled,
+  optionsList,
+  className,
+  required,
+  openup,
+  columns,
+  mods,
+  baseMessage,
+  extraMessage,
+  successMessage,
+  selectType = 'single',
+  slideMobile,
+  ...props
+} = Astro.props
+const ariaLabel = buttonAriaLabel ? buttonAriaLabel : 'Выберите одну из опций'
+const disabledState = disabled ? true : false
+const label =
+  selectLabel && required
+    ? `${selectLabel}<span class='custom-select__required'>*</span>`
+    : selectLabel
+const multiple = selectType === 'multiple' || selectType === 'filter'
+---
+
+<div
+  class="custom-select"
+  class:list={[
+    className,
+    openup && 'open-up',
+    selectType === 'filter' && 'custom-select--filter',
+    slideMobile && 'custom-select--slide-mobile',
+    mods?.map((mod: string) => `custom-select--${mod}`)
+  ]}
+  data-select
+  data-multiple={multiple}
+  data-name={selectName}
+  data-id={selectId}
+  data-required={required}
+  data-validate-type="select"
+  data-select-type={selectType}
+  data-slide-mobile={slideMobile}
+  data-message-base={baseMessage}
+  data-message-extra={extraMessage}
+  data-message-success={successMessage}
+  {...props}
+>
+  {
+    selectLabel && (
+      <span class="custom-select__label" data-select-label set:html={label} />
+    )
+  }
+
+  {selectError && <span class="custom-select__error" set:html={selectError} />}
+
+  <button
+    class="custom-select__button"
+    type="button"
+    aria-label={ariaLabel}
+    data-select-btn
+    disabled={disabledState}
+  >
+    {
+      selectPlaceholder && (
+        <span class="custom-select__placeholder" set:html={selectPlaceholder} />
+      )
+    }
+    <span class="custom-select__text" data-select-text></span>
+    <span class="custom-select__icon">
+      <Icon name={'arrow-down'} />
+    </span>
+  </button>
+
+  <div class="custom-select__list-wrapper">
+    <SelectList
+      optionsList={optionsList}
+      className="custom-select__list"
+      listType={selectType}
+      slideMobile={slideMobile}
+      columns={columns}
+    />
+  </div>
+  <script>
+    import CustomSelect from './CustomSelect'
+    CustomSelect.initCustomSelect()
+  </script>
+</div>

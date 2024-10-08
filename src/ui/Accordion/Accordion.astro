@@ -1,0 +1,24 @@
+---
+interface Props {
+  mods?: string[]
+  className?: string
+}
+
+const { mods, className, ...props } = Astro.props
+---
+
+<div
+  class:list={[
+    'accordion',
+    mods?.map((mod) => `accordion--${mod}`),
+    className && className
+  ]}
+  data-accordion="parent"
+  {...props}
+>
+  <slot />
+  <script>
+    import { initAccordions } from './Accordion'
+    initAccordions()
+  </script>
+</div>

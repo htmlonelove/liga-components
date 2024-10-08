@@ -1,0 +1,88 @@
+---
+import { Icon } from 'astro-icon/components'
+import SelectList, { type OptionsItem } from './SelectList/SelectList.astro'
+
+export interface Props {
+  selectLabel?: string
+  selectError?: string
+  selectPlaceholder?: string
+  selectName?: string
+  selectId?: string
+  buttonAriaLabel?: string
+  disabled?: boolean
+  optionsList: OptionsItem[]
+  multiple?: boolean
+  className?: string[]
+  required?: boolean
+  insert?: boolean
+  openup?: boolean
+}
+
+const {
+  selectLabel,
+  selectError,
+  selectPlaceholder,
+  selectName,
+  selectId,
+  buttonAriaLabel,
+  disabled,
+  optionsList,
+  className,
+  multiple = false,
+  required,
+  insert,
+  openup,
+  ...props
+} = Astro.props
+const arialLabel = buttonAriaLabel ? buttonAriaLabel : 'Выберите одну из опций'
+const disabledState = disabled ? true : false
+---
+
+<div
+  class="custom-select"
+  class:list={[className, openup && 'open-up']}
+  data-select
+  data-multiple={multiple}
+  data-name={selectName}
+  data-id={selectId}
+  data-required={required}
+  data-insert={insert}
+  {...props}
+>
+  {
+    selectLabel && (
+      <span
+        class="custom-select__label"
+        data-select-label
+        set:html={selectLabel}
+      />
+    )
+  }
+
+  {selectError && <span class="custom-select__error" set:html={selectError} />}
+
+  {
+    selectPlaceholder && (
+      <span class="custom-select__placeholder" set:html={selectPlaceholder} />
+    )
+  }
+
+  <button
+    class="custom-select__button"
+    type="button"
+    aria-label={arialLabel}
+    data-select-btn
+    disabled={disabledState}
+  >
+    <span class="custom-select__text" data-select-text></span>
+    <span class="custom-select__icon">
+      <Icon name={'arrow-down'} />
+    </span>
+  </button>
+
+  <SelectList optionsList={optionsList} className="custom-select__list" />
+  <script>
+    import { initCustomSelect } from './CustomSelect'
+    initCustomSelect()
+  </script>
+</div>

@@ -1,0 +1,398 @@
+---
+import Container from '@components/Container/Container'
+import Modal from '@components/Modal/Modal'
+import UIKitLayout from '@layouts/UI-kit/UI-kit'
+import Button from '@ui/Button/Button'
+import Title from '@ui/Title/Title'
+import Accordion from '@ui/Accordion/Accordion'
+import AccordionElement from '@ui/AccordionElement/AccordionElement'
+import Picture from '@ui/Picture/Picture'
+import Tabs from '@ui/Tabs/Tabs'
+import TabElement from '@ui/Tabs/TabElement/TabElement'
+import CustomInput from '@ui/CustomInput/CustomInput'
+import CustomToggle from '@ui/CustomToggle/CustomToggle'
+import CustomSelect from '@ui/CustomSelect/CustomSelect'
+import UploadFile from '@ui/UploadFile/UploadFile'
+---
+
+<UIKitLayout>
+  <div class="ui">
+    <Container>
+      <h1 class="ui-title">UI-kit</h1>
+      <section data-ui-section>
+        <h2 class="ui__title" data-ui-title>Заголовки</h2>
+        <Title text="Title size=`xl`" as="h1" size="xl" />
+        <Title text="Title size=`lg`" as="h2" size="lg" />
+        <Title text="Title size=`md`" as="h3" size="md" />
+        <Title text="Title size=`sm`" as="p" size="sm" />
+        <Title
+          text="Title size=`sm` --uppercase"
+          as="p"
+          size="sm"
+          mods={['uppercase']}
+        />
+      </section>
+      <section data-ui-section>
+        <h2 class="ui__title" data-ui-title>Кнопки</h2>
+        <Button text="Классическая кнопка" />
+        <Button icon="icon-close" text="Кнопка с иконкой" />
+        <Button icon="arrow-left" iconPosBefore text="Кнопка с иконкой" />
+        <Button mods={['fill']} text="Кнопка с фоном" />
+        <Button mods={['fill']} as="a" href="#" text="Кнопка ссылка" />
+      </section>
+      <section data-ui-section>
+        <h2 class="ui__title" data-ui-title>Модалки</h2>
+        <Button text="Стандартная модалка" modal="example" />
+      </section>
+      <section data-ui-section>
+        <h2 class="ui__title" data-ui-title>Аккордеон</h2>
+        <h3>Аккордеон с текстом</h3>
+        <Accordion>
+          <AccordionElement
+            title="Заголовок 1"
+            text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi."
+          />
+          <AccordionElement title="Заголовок 2" text="Содержимое 2" />
+          <AccordionElement title="Заголовок 3" text="Содержимое 3" />
+        </Accordion>
+        <h3>Аккордеон с текстом (открыт всегда только один элемент)</h3>
+        <Accordion data-single>
+          <AccordionElement
+            title="Заголовок 1"
+            text="Открыт при загрузке"
+            isActive
+          />
+          <AccordionElement title="Заголовок 2" text="Содержимое 2" />
+          <AccordionElement title="Заголовок 3" text="Содержимое 3" />
+        </Accordion>
+        <h3>Аккордеон с произвольным контентом</h3>
+        <Accordion>
+          <AccordionElement title="Заголовок 1">
+            <p>Содержимое 1</p>
+            <Button text="Кнопка" />
+          </AccordionElement>
+          <AccordionElement title="Изображение">
+            <Picture
+              name="mountain"
+              folder="images"
+              alt="Example image"
+              type="jpg"
+              width={360}
+            />
+          </AccordionElement>
+          <AccordionElement title="Заголовок 3" text="Содержимое 3" />
+        </Accordion>
+        <h3>Многоуровневый аккордеон</h3>
+        <Accordion>
+          <AccordionElement title="Заголовок 1">
+            <p>Содержимое 1</p>
+            <Accordion>
+              <AccordionElement title="Подзаголовок 1">
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Dolorum, deserunt ducimus consectetur labore unde tempora.
+                  Quas quae ducimus at, fugit, aspernatur impedit excepturi
+                  minus error suscipit aliquam nisi molestiae eum!
+                </p>
+              </AccordionElement>
+              <AccordionElement title="Подзаголовок 2">
+                <p>Содержимое подзаголовка 2</p>
+              </AccordionElement>
+            </Accordion>
+          </AccordionElement>
+          <AccordionElement title="Заголовок 2">
+            <p>Содержимое 2</p>
+            <Accordion>
+              <AccordionElement title="Подзаголовок 1">
+                <p>Содержимое подзаголовка 1</p>
+              </AccordionElement>
+              <AccordionElement title="Подзаголовок 2">
+                <p>Содержимое подзаголовка 2</p>
+                <Accordion>
+                  <AccordionElement title="Подзаголовок 1">
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Eaque, libero iure, tempore praesentium voluptates labore
+                      est perferendis excepturi accusamus, autem itaque repellat
+                      maxime sit in blanditiis nostrum qui cupiditate totam?
+                    </p>
+                  </AccordionElement>
+                  <AccordionElement title="Подзаголовок 2">
+                    <p>Содержимое подзаголовка 2</p>
+                  </AccordionElement>
+                </Accordion>
+              </AccordionElement>
+            </Accordion>
+          </AccordionElement>
+        </Accordion>
+      </section>
+      <section data-ui-section>
+        <h2 class="ui__title" data-ui-title>Табы</h2>
+        <h3>Простые табы</h3>
+        <Tabs
+          controls={{
+            list: [
+              { text: 'Страница таба 1', isActive: true },
+              { text: 'Страница таба 2' },
+              { text: 'Страница таба 3' }
+            ]
+          }}
+        >
+          <TabElement>
+            <p>Содержимое таба 1</p>
+          </TabElement>
+          <TabElement>
+            <p>Содержимое таба 2</p>
+          </TabElement>
+          <TabElement>
+            <p>Содержимое таба 3</p>
+          </TabElement>
+        </Tabs>
+        <h3>Табы, на мобильном аккордеон</h3>
+        <Tabs
+          controls={{
+            list: [
+              { text: 'Страница таба 1', isActive: true },
+              { text: 'Страница таба 2' },
+              { text: 'Страница таба 3' }
+            ]
+          }}
+          data-accordion-media="(max-width: 767px)"
+          data-single
+        >
+          <TabElement>
+            <p>Содержимое таба 1</p>
+          </TabElement>
+          <TabElement>
+            <p>Содержимое таба 2</p>
+          </TabElement>
+          <TabElement>
+            <p>Содержимое таба 3</p>
+          </TabElement>
+        </Tabs>
+        <h3>Табы, на планшете аккордеон</h3>
+        <Tabs
+          controls={{
+            list: [
+              { text: 'Страница таба 1', isActive: true },
+              { text: 'Страница таба 2' },
+              { text: 'Страница таба 3' }
+            ]
+          }}
+          data-accordion-media="(min-width: 768px) and (max-width: 1023px)"
+          data-single
+        >
+          <TabElement>
+            <p>Содержимое таба 1</p>
+          </TabElement>
+          <TabElement>
+            <p>Содержимое таба 2</p>
+          </TabElement>
+          <TabElement>
+            <p>Содержимое таба 3</p>
+          </TabElement>
+        </Tabs>
+        <h3>Табы с аккордеонами</h3>
+        <Tabs
+          controls={{
+            list: [
+              { text: 'Страница таба 1', isActive: true },
+              { text: 'Страница таба 2' },
+              { text: 'Страница таба 3' }
+            ]
+          }}
+        >
+          <TabElement>
+            <Accordion>
+              <AccordionElement
+                title="Заголовок 1"
+                text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi."
+              />
+            </Accordion>
+          </TabElement>
+          <TabElement>
+            <Accordion>
+              <AccordionElement title="Заголовок 2" text="Содержимое 2" />
+              <AccordionElement title="Заголовок 3" text="Содержимое 3" />
+            </Accordion>
+          </TabElement>
+          <TabElement>
+            <p>Содержимое таба 3</p>
+          </TabElement>
+        </Tabs>
+      </section>
+      <section data-ui-section>
+        <h2 class="ui__title" data-ui-title>Элементы форм</h2>
+        <h3>Custom input</h3>
+        <CustomInput
+          inputLabel="Имя"
+          placeholder="Введите имя"
+          as="input"
+          name="name"
+        />
+        <CustomInput
+          inputLabel="Имя"
+          placeholder="Введите имя"
+          as="input"
+          name="name-2"
+          disabled
+        />
+        <CustomInput
+          inputLabel="Textarea"
+          placeholder="Составьте жалобу на сотрудников"
+          as="textarea"
+          name="message"
+        />
+        <h3>Custom toggle (radio)</h3>
+        <CustomToggle
+          name="choice"
+          value="variant1"
+          inputLabel="Variant 1"
+          mods={['radio']}
+          type="radio"
+          checked
+        />
+        <CustomToggle
+          name="choice"
+          value="variant2"
+          inputLabel="Variant 2"
+          mods={['radio']}
+          type="radio"
+        />
+        <CustomToggle
+          name="choice"
+          value="variant3"
+          inputLabel="Variant 3"
+          mods={['radio']}
+          type="radio"
+        />
+        <CustomToggle
+          name="choice"
+          value="variant4"
+          inputLabel="Variant 4"
+          mods={['radio']}
+          type="radio"
+          disabled
+        />
+        <h3>Custom toggle (checkbox)</h3>
+        <CustomToggle
+          name="milk"
+          value="milk"
+          inputLabel="Milk"
+          mods={['checkbox']}
+          type="checkbox"
+          checked
+        />
+        <CustomToggle
+          name="honey"
+          value="honey"
+          inputLabel="Honey"
+          mods={['checkbox']}
+          type="checkbox"
+        />
+        <CustomToggle
+          name="bread"
+          value="bread"
+          inputLabel="Bread"
+          mods={['checkbox']}
+          type="checkbox"
+          disabled
+        />
+        <h3>Custom select</h3>
+        <CustomSelect
+          selectPlaceholder="Выберите город"
+          optionsList={[
+            { text: 'Москва', value: 'moscow' },
+            { text: 'Санкт-Петербург', value: 'spb' },
+            { text: 'Казань', value: 'kazan' },
+            { text: 'Новосибирск', value: 'novosibirsk' },
+            { text: 'Санта Барбара', value: 'santa barbara' }
+          ]}
+          selectName="city"
+        />
+        <CustomSelect
+          selectPlaceholder="Выберите город"
+          optionsList={[
+            { text: 'Москва', value: 'moscow' },
+            { text: 'Санкт-Петербург', value: 'spb' },
+            { text: 'Казань', value: 'kazan' },
+            { text: 'Новосибирск', value: 'novosibirsk' },
+            { text: 'Екатеринбург', value: 'ekaterinburg' }
+          ]}
+          disabled
+        />
+        <h3>Custom select (множественный выбор)</h3>
+        <CustomSelect
+          selectPlaceholder="Выберите город"
+          optionsList={[
+            { text: 'Москва', value: 'moscow' },
+            { text: 'Санкт-Петербург', value: 'spb' },
+            { text: 'Казань', value: 'kazan' },
+            { text: 'Новосибирск', value: 'novosibirsk' },
+            { text: 'Екатеринбург', value: 'ekaterinburg' }
+          ]}
+          multiple
+        />
+        <h3>Custom select (множественный выбор + вставка текста в кнопку)</h3>
+        <CustomSelect
+          selectPlaceholder="Выберите город"
+          optionsList={[
+            { text: 'Москва', value: 'moscow' },
+            { text: 'Санкт-Петербург', value: 'spb' },
+            { text: 'Казань', value: 'kazan' },
+            { text: 'Новосибирск', value: 'novosibirsk' },
+            { text: 'Екатеринбург', value: 'ekaterinburg' }
+          ]}
+          multiple
+          insert
+        />
+        <h3>Custom select (список раскрывается вверх)</h3>
+        <CustomSelect
+          selectPlaceholder="Выберите город"
+          optionsList={[
+            { text: 'Москва', value: 'moscow' },
+            { text: 'Санкт-Петербург', value: 'spb' },
+            { text: 'Казань', value: 'kazan' },
+            { text: 'Новосибирск', value: 'novosibirsk' },
+            { text: 'Екатеринбург', value: 'ekaterinburg' }
+          ]}
+          openup
+        />
+        <h3>Upload file</h3>
+        <h4>Загрузка документа (docx, xslx, pdf) с превью</h4>
+        <UploadFile uploadType="file" btnText="Загрузить файл" name="file-1" />
+        <h4>Загрузка изображения (png, jpg, webp) с превью</h4>
+        <UploadFile uploadType="img" btnText="Загрузить файл" name="file-2" />
+        <h4>Загрузка изображения (png, jpg, webp) с дропзоной</h4>
+        <UploadFile
+          uploadType="img-drop"
+          btnText="Загрузить файл"
+          name="file-3"
+        />
+        <h4>Загрузка документа (docx, xslx, pdf) с дропзоной</h4>
+        <UploadFile
+          uploadType="file-drop"
+          btnText="Загрузить файл"
+          name="file-4"
+        />
+        <h4>Загрузка документа (docx, xslx, pdf) с превью и дропзоной</h4>
+        <UploadFile
+          uploadType="file-drop-preview"
+          btnText="Загрузить файл"
+          name="file-5"
+        />
+      </section>
+    </Container>
+  </div>
+  <Modal name="example">
+    <h1>Example modal</h1>
+  </Modal>
+</UIKitLayout>
+
+<!--
+  для работы навигации необходимо проставить дата атрибуты:
+  <section data-ui-section>
+    <h2 class="ui__title" data-ui-title>Заголовки</h2>
+    ...
+  </section>
+-->

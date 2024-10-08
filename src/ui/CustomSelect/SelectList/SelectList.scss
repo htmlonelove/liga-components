@@ -1,0 +1,45 @@
+.select-list {
+  width: 100%;
+  max-height: 400px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+
+  list-style: none;
+
+  background-color: var(--color-white);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+
+  transform: translateY(100%);
+  visibility: hidden;
+  opacity: 0;
+
+  transition: visibility $transition, opacity $transition;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 12px 32px;
+    min-height: 32px;
+
+    outline: none;
+    cursor: pointer;
+
+    font-size: 16px;
+    line-height: 1;
+    color: var(--color-black);
+
+    transition: background-color $transition;
+
+    &[aria-selected="true"] {
+      font-weight: 700;
+      background-color: var(--color-lavender);
+    }
+
+    @include hover {
+      background: var(--color-lavender);
+    }
+  }
+}

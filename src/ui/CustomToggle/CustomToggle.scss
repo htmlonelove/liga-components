@@ -1,0 +1,149 @@
+.custom-toggle {
+  $root: &;
+
+  position: relative;
+  padding: 12px 0;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--color-black);
+
+  display: flex;
+  align-items: center;
+
+  &__icon {
+    position: relative;
+    flex-shrink: 0;
+
+    width: 16px;
+    height: 16px;
+    min-height: unset;
+    overflow: hidden;
+
+    color: var(--color-bright-turquoise);
+    background-color: var(--color-bright-turquoise-a016);
+    border: 1px solid rgba(0, 0, 0, 0.32);
+    border-radius: 3px;
+    transition: border-color $transition;
+
+    svg {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate3d(-50%, -50%, 0);
+      width: 15px;
+      height: 10px;
+      opacity: 0;
+
+      transition: opacity $transition;
+    }
+  }
+
+  &__label {
+    text-align: left;
+  }
+
+  input {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+
+    clip: rect(0 0 0 0);
+
+    &:checked + #{$root}__icon {
+      svg {
+        opacity: 1;
+      }
+    }
+
+    @include hover-focus {
+      & + #{$root}__icon {
+        border-color: rgba(0, 0, 0, 0.7);
+      }
+    }
+
+    &:checked {
+      @include hover-focus {
+        & + #{$root}__icon {
+          border-color: rgba(0, 0, 0, 0.7);
+        }
+      }
+    }
+
+    &:disabled {
+      pointer-events: none;
+      cursor: default;
+
+      & ~ #{$root}__icon,
+      & ~ #{$root}__label {
+        opacity: 0.3;
+      }
+
+      @include hover-focus {
+        & + #{$root}__icon {
+          border-color: rgba(0, 0, 0, 0.32);
+        }
+      }
+    }
+  }
+
+  label {
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    cursor: pointer;
+
+    padding-left: 0;
+
+    span {
+      margin-bottom: 0;
+      margin-left: 0;
+    }
+  }
+
+  @include hover-focus {
+    #{$root}__icon {
+      box-shadow: inset 0 0 0 3px var(--color-bright-turquoise);
+    }
+  }
+
+  &--disabled {
+    label {
+      cursor: default;
+    }
+  }
+
+  &--radio {
+    #{$root}__icon {
+      border-radius: 50%;
+
+      &::before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
+
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition: opacity $transition;
+        content: "";
+      }
+    }
+
+    input:checked + #{$root}__icon::before {
+      opacity: 1;
+    }
+
+    input:disabled {
+      opacity: 0.3;
+    }
+  }
+}

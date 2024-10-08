@@ -1,0 +1,31 @@
+.title {
+  margin: 0;
+  font-size: 38px;
+  line-height: 100%;
+  font-weight: 600;
+  color: var(--color-fedora);
+
+  &--xl {
+    font-size: 58px;
+  }
+
+  &--lg {
+    font-size: 48px;
+  }
+
+  &--md {
+    font-size: 38px;
+  }
+
+  &--sm {
+    font-size: 28px;
+  }
+
+  &--xs {
+    font-size: 18px;
+  }
+
+  &--xxs {
+    font-size: 16px;
+  }
+}

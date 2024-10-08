@@ -1,0 +1,67 @@
+.custom-input,
+.custom-textarea {
+  position: relative;
+
+  display: flex;
+  width: 100%;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+
+    input,
+    textarea {
+      flex-grow: 1;
+      width: 100%;
+      padding: 16px;
+      height: 48px;
+
+      border: 1px solid rgba(0, 0, 0, 0.16);
+      background-color: var(--color-lavender);
+      border-radius: 8px;
+
+      transition: background-color $transition, color $transition, -webkit-text-fill-color $transition, border-color $transition;
+
+      font-size: 16px;
+      line-height: 1;
+      color: var(--color-black);
+      outline: none;
+
+      &::placeholder {
+        font-size: 16px;
+        line-height: 1;
+        color: var(--color-fedora);
+        transition: opacity $transition;
+      }
+
+      @include hover {
+        border-color: rgba(0, 0, 0, 0.32);
+
+        &::placeholder {
+          opacity: 0.72;
+        }
+      }
+
+      @include focus {
+        outline: none;
+        border-color: rgba(0, 0, 0, 0.5);
+      }
+
+      &:disabled {
+        opacity: 0.3;
+        pointer-events: none;
+
+        &::placeholder {
+          opacity: 0.48;
+        }
+      }
+    }
+
+    textarea {
+      padding: 16px 30px;
+      height: 260px;
+    }
+  }
+}

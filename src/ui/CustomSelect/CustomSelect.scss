@@ -1,0 +1,254 @@
+.custom-select {
+  position: relative;
+
+  width: 100%;
+
+  &__label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+
+    transform: translateY(-50%);
+
+    transition: transform 0.3s ease, opacity  0.3s ease;
+
+    pointer-events: none;
+
+    @media screen and (max-width: 767px) {
+      transform: translateY(calc(-50% - 5px));
+    }
+  }
+
+  &__placeholder {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    max-width: 80%;
+
+    /* stylelint-disable-next-line value-no-vendor-prefix */
+    display: -webkit-box;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    font-size: 14px;
+    line-height: 140%;
+    color: var(--color-black);
+
+
+    transform: translateY(-50%);
+
+    transition: transform 0.3s ease, opacity 0.3s ease;
+
+    pointer-events: none;
+  }
+
+  select {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    border: 0;
+
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 20px;
+
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    outline: none;
+
+    cursor: pointer;
+
+    transition: background-color $transition, border-color $transition;
+
+    @include hover {
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    @include focus {
+      border-color: rgba(0, 0, 0, 0.6);
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+  }
+
+  &__error {
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+
+    color: var(--color-tomato);
+
+    opacity: 0;
+
+    transition: opacity 0.1s ease;
+  }
+
+  &__text {
+    font-size: 14px;
+    line-height: 140%;
+    color: var(--color-black);
+
+    flex-shrink: 0;
+    width: 80%;
+    overflow: hidden;
+
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    opacity: 0;
+
+    transition: opacity 0.3s ease 0.1s;
+
+    br {
+      display: none;
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin-left: auto;
+    transform: translateZ(0);
+    color: var(--color-black);
+
+    svg {
+      width: 100%;
+      height: 100%;
+
+      transform: translateZ(0);
+    }
+
+    transition: transform 0.3s ease;
+  }
+
+  .select-list {
+    position: absolute;
+    bottom: -10px;
+    z-index: 3;
+  }
+
+  &.is-disabled {
+    pointer-events: none;
+
+    .select-list {
+      display: none;
+    }
+  }
+
+  &.open-up {
+    .select-list {
+      bottom: auto;
+      top: 0;
+      transform: translateY(calc(-100% - 10px));
+    }
+  }
+
+  &.is-open {
+    .select-list {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .custom-select__button {
+      border-color: var(--color-pumpkin);
+    }
+
+    .custom-select__icon {
+      transform: rotate(-179.99deg);
+    }
+
+    .custom-select__label {
+      opacity: 0;
+    }
+  }
+
+  &.not-empty {
+    .custom-select__text {
+      opacity: 1;
+    }
+
+    .custom-select__label {
+      opacity: 0;
+    }
+
+    .custom-select__placeholder {
+      opacity: 0;
+    }
+  }
+
+  &.is-invalid {
+    .custom-select__error {
+      opacity: 1;
+    }
+
+    .custom-select__button {
+      border: 1px solid var(--color-tomato);
+
+      @include hover {
+        border-color: var(--color-tomato);
+      }
+
+      @include focus {
+        border-color: var(--color-tomato);
+      }
+    }
+  }
+
+  &--placeholder {
+    .custom-select__label {
+      transform: translateY(calc(-50% - 40px));
+      opacity: 1;
+    }
+
+    &.is-open .custom-select__label {
+      opacity: 1;
+    }
+
+    &.not-empty .custom-select__label {
+      opacity: 1;
+    }
+  }
+
+  &.slide-up.not-empty,
+  &.slide-up.is-open {
+    .custom-select__label {
+      transform: translateY(calc(-50% - 40px));
+      opacity: 1;
+    }
+
+    .custom-select__text {
+      opacity: 1;
+    }
+  }
+
+  .input-message {
+    position: absolute;
+    right: 0;
+    bottom: -5px;
+
+    &.is-invalid {
+      color: var(--color-tomato);
+    }
+  }
+}

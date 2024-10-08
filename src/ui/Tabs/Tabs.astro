@@ -1,0 +1,24 @@
+---
+import TabsControls, {
+  type Props as TabControlsProps
+} from './TabsControls/TabsControls.astro'
+
+interface Props {
+  controls: TabControlsProps
+  delay?: number
+}
+
+const { delay, controls, ...props } = Astro.props
+---
+
+<div class="tabs" data-tabs="parent" data-delay=`${delay || 0}` {...props}>
+  <TabsControls list={controls.list} isTabs={true} className="tabs__controls" />
+  <div class="tabs__content" data-tabs="content">
+    <slot />
+  </div>
+  <script>
+    // import { initTabs } from './init-tabs'
+    import { initTabs } from './Tabs'
+    initTabs()
+  </script>
+</div>

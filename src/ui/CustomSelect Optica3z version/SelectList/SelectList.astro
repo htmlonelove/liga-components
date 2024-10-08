@@ -1,0 +1,52 @@
+---
+export interface OptionsItem {
+  isActive?: boolean
+  text: string
+  value: string
+}
+
+interface Props {
+  optionsList: OptionsItem[]
+  className?: string
+  listType?: 'single' | 'multiple' | 'filter'
+  slideMobile?: boolean
+  columns?: boolean
+}
+
+const { optionsList, className, listType, slideMobile, columns, ...props } =
+  Astro.props
+const multiple = listType === 'multiple' || listType === 'filter'
+---
+
+<ul
+  class:list={[
+    'select-list',
+    'custom-scrollbar',
+    className,
+    listType === 'filter' && 'select-list--filter',
+    slideMobile && 'select-list--slide-mobile',
+    columns && 'select-list--columns'
+  ]}
+  role="listbox"
+  aria-label="Отметьте необходимые опции"
+  data-scroll-lock-scrollable
+  {...props}
+>
+  {
+    optionsList.map((item) => {
+      const ariaSelected = item.isActive ? 'true' : 'false'
+      return (
+        <li
+          class="select-list__item"
+          tabindex="0"
+          data-select-value={item.value}
+          aria-selected={ariaSelected}
+          role="option"
+        >
+          <span class="select-list__item-text" set:html={item.text} />
+          {multiple && <span class="select-list__checkbox-icon" />}
+        </li>
+      )
+    })
+  }
+</ul>

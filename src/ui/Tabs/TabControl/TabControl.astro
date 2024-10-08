@@ -1,0 +1,32 @@
+---
+import type { HTMLTag, Polymorphic } from 'astro/types'
+import Picture, { type Props as PictureProps } from '@ui/Picture/Picture'
+
+export type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
+  text?: string
+  href?: string
+  type?: string
+  image?: PictureProps
+  isActive?: boolean
+}
+
+const {
+  as: Tag = 'button',
+  type,
+  href,
+  text,
+  image,
+  isActive,
+  ...props
+} = Astro.props
+---
+
+<Tag
+  class:list={['tab-control', isActive && 'is-active']}
+  type={type}
+  href={href}
+  {...props}
+>
+  {text && <span class="tab-control__text" set:html={text} />}
+  {image && <Picture {...image} />}
+</Tag>
